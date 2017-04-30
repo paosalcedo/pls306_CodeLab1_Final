@@ -35,8 +35,6 @@ public class ParticleMovement : MonoBehaviour {
 				dir = reflection;
 			}
 
-			GameObject target = Instantiate (Resources.Load("Prefabs/Target") as GameObject);
-			target.transform.position = rayHit.point; 
 		}
 		else {
 				dir = transform.right;
