@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour {
 	[SerializeField]float rotationSpeed;
 	[SerializeField]KeyCode forwardKey;
 	[SerializeField]KeyCode backKey;
+	[SerializeField]KeyCode rightKey;
+	[SerializeField]KeyCode leftKey;
 	[SerializeField]KeyCode rotateClockwise;
 	[SerializeField]KeyCode rotateCounterClockwise;
 	
@@ -22,12 +24,14 @@ public class PlayerMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Move(transform.right, forwardKey);
-//		Move(-transform.right, backKey);
-		RotatePlayer(1, rotateClockwise);
-		RotatePlayer(-1, rotateCounterClockwise);
+		Move(Vector3.up, forwardKey);
+		Move(Vector3.down, backKey);
+		Move(Vector3.left, rightKey);
+		Move(Vector3.right, leftKey);
+		RotatePlayer(-1, rotateClockwise);
+		RotatePlayer(1, rotateCounterClockwise);
 
-		ShootRay();
+//		ShootRay();
 	}
 
 	void Move(Vector3 dir, KeyCode key){

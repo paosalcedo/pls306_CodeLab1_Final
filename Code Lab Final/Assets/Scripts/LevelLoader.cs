@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour {
 
   	public float offsetX = 0;
-	public float offsetZ = 0;
+	public float offsetY = 0;
+//	public float offsetZ = 0;
+
 	 
 	public string[] fileNames;
 	public static int levelNum = 0;
@@ -49,7 +51,7 @@ public class LevelLoader : MonoBehaviour {
 
 					wall.transform.position = new Vector3 (
 						xPos + offsetX, 
-						yPos,
+						yPos + offsetY,
 						0						
 					);
 				}
@@ -59,7 +61,7 @@ public class LevelLoader : MonoBehaviour {
 					GameObject player = Instantiate (Resources.Load ("Prefabs/Player") as GameObject);
 					player.transform.position = new Vector3 (
 						xPos + offsetX, 
-						yPos,
+						yPos + offsetY,
 						0		
 					);
 				}
