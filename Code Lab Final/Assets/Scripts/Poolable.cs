@@ -2,15 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Poolable : MonoBehaviour {
+public abstract class Poolable : MonoBehaviour {
 
-	// Use this for initialization
+	public enum types {
+		CORNER, WALL
+	}
+
 	void Start () {
-		
+		Setup();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+ 	void Update () {
+		if(RePool()){
+			ObjectPool.AddToPool(gameObject); 
+		}		
 	}
+
+	public abstract void Setup();
+
+	public abstract bool RePool();
+
+	public abstract void Reset();
+
 }

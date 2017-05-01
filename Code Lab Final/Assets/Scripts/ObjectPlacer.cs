@@ -19,8 +19,8 @@ public class ObjectPlacer : MonoBehaviour {
 			RaycastHit rayHit; //create a RaycastHit object
 			
  			if(Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out rayHit, Camera.main.farClipPlane)){
-				GameObject block = Instantiate (Resources.Load("Prefabs/Wall") as GameObject);
-				block.transform.position = rayHit.point;
+				GameObject corner = Instantiate (Resources.Load("Prefabs/Corner") as GameObject);
+				corner.transform.position = rayHit.point;
 				Debug.Log(rayHit.transform.name);
  			} else {
 				Debug.Log("hit nothing!");

@@ -65,6 +65,15 @@ public class LevelLoader : MonoBehaviour {
 						0		
 					);
 				}
+			
+				if (line [xPos] == 'g') {
+					GameObject floor = Instantiate (Resources.Load ("Prefabs/Goal") as GameObject);
+					floor.transform.position = new Vector3 (
+						xPos + offsetX, 
+						yPos + offsetY,
+						0		
+					);
+				}
 
 			}
 			
@@ -74,9 +83,13 @@ public class LevelLoader : MonoBehaviour {
 		sr.Close();
 	}
 
+	public static bool playerIsAtGoal;
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+	{
+		if (playerIsAtGoal == true) {
+			LoadNextLevel();
+		}
 	}
 
 	void LoadNextLevel ()
