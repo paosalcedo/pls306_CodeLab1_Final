@@ -38,6 +38,9 @@ public class ParticleMovement : MonoBehaviour {
 				Vector3.Distance (transform.position, rayHit.point) < 0.25f && rayHit.collider.tag != "Goal") {
 				dir = reflection;
 			}
+			else if (rayHit.collider.tag == "Goal") {
+				LevelLoader.playerIsAtGoal = true;
+			}
 
 //			if (isColliding == true) {
 //				dir = reflection;
@@ -47,9 +50,7 @@ public class ParticleMovement : MonoBehaviour {
 			dir = transform.right;
 		}
 
-		if (rayHit.collider.tag == "Goal") {
-			LevelLoader.playerIsAtGoal = true;
-		}
+
 	}
 
 //	public bool isColliding;
