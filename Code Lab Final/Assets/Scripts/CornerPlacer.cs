@@ -25,7 +25,7 @@ public class CornerPlacer : ObjectPlacer {
 			RaycastHit rayHit; //create a RaycastHit object	
 			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out rayHit, Camera.main.farClipPlane)) {
 				cursorCorner.transform.position = rayHit.point;
-				Debug.Log (rayHit.transform.name);
+//				Debug.Log (rayHit.transform.name);
 			}
 		}
  		else {

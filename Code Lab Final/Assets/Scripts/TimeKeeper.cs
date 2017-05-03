@@ -21,16 +21,27 @@ public class TimeKeeper : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		timeAtLevelStart -= Time.deltaTime;
-		if (timeAtLevelStart <= 0) {
-			LevelLoader.LoadGameOver();
+		if (LevelLoader.levelNum <= 7) { //normal levels
+			timeAtLevelStart -= Time.deltaTime;
+			if (timeAtLevelStart <= 0) {
+				LevelLoader.LoadGameOver ();
+			}
+		} else { // game over and you win levels.
+ 			timeAtLevelStart -= Time.deltaTime;
+			if (timeAtLevelStart <= 0) {
+				LevelLoader.RestartScene ();
+			}
 		}
 		ShowTimer();
 	}
 
 	void ShowTimer ()
 	{
-  		timeText.text = timeAtLevelStart.ToString ("Time Left: " + "##");
+		if (LevelLoader.levelNum <= 7) { 
+			timeText.text = timeAtLevelStart.ToString ("Time Left: " + "##");
+		} else {
+			timeText.text = timeAtLevelStart.ToString ("Restarting game in " + "##");
+		}
 	}
 
 }

@@ -44,7 +44,7 @@ public class ObjectPlacer : MonoBehaviour {
 			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out rayHit, Camera.main.farClipPlane)) {
 				cursorCube.transform.position = rayHit.point;
 				Debug.Log (rayHit.transform.name);
-			} 
+ 			} 
 		} else {
 			cursorCube.transform.position = new Vector3 (10000, 10000, 10000);
 		}
@@ -53,15 +53,14 @@ public class ObjectPlacer : MonoBehaviour {
 	public virtual void PlaceObject (int num)
 	{
 		num = blockNum;
+		
 		if (num == 1) {
 			RaycastHit rayHit; //create a RaycastHit object	
 			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out rayHit, Camera.main.farClipPlane)) {
-				GameObject cube = Instantiate (Resources.Load ("Prefabs/Cube") as GameObject);
+//				GameObject cube = Instantiate (Resources.Load ("Prefabs/Cube") as GameObject);
+				GameObject cube = ObjectPool.GetFromPool(Poolable.types.WALL);
 				cube.transform.position = rayHit.point;
-				Debug.Log (rayHit.transform.name);
-			} else {
-				Debug.Log ("hit nothing!");
-			}
+ 			}  
 		}
   	}
 

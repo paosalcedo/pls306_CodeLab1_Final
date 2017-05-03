@@ -12,10 +12,12 @@ public abstract class Poolable : MonoBehaviour {
 		Setup();
 	}
 	
- 	void Update () {
-		if(RePool()){
+ 	void Update ()
+	{
+ 		if(RePool()){
 			ObjectPool.AddToPool(gameObject); 
-		}		
+  		}	
+	
 	}
 
 	public abstract void Setup();

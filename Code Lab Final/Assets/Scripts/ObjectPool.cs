@@ -18,23 +18,25 @@ public class ObjectPool : MonoBehaviour {
 				return result;
 			}
 			else {
-				result = Instantiate (Resources.Load ("Prefabs/Cylinder") as GameObject);
+				result = Instantiate (Resources.Load ("Prefabs/Corner") as GameObject);
 				return result;
-
 			} 
 		} 
 		else {
 			if (wallPool.Count > 0) {
 				result = wallPool.Dequeue();
 				return result;
-
 			} 
 
 			else {
-				result = Instantiate (Resources.Load ("Prefabs/Wall") as GameObject);
+				result = Instantiate (Resources.Load ("Prefabs/Cube") as GameObject);
 				return result;
  			} 
-		}	
+		}
+
+		result.SetActive(true);
+		result.GetComponent<Poolable>().Reset();
+		return result;	
 	}
 
 	public static void AddToPool (GameObject obj)
@@ -44,8 +46,11 @@ public class ObjectPool : MonoBehaviour {
 		
 		if (p is PoolableCorner) {
 			cornerPool.Enqueue (obj);
+			Debug.Log("corner enqueued!");
 		} else if (p is PoolableWall) {
 			wallPool.Enqueue (obj);
+			Debug.Log("cube enqueued!");
+
 		} else {
 			Debug.Log("you have not implemented a pool for this");
 		}

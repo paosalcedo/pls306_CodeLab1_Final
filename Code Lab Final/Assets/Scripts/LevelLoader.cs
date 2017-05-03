@@ -89,7 +89,7 @@ public class LevelLoader : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (playerIsAtGoal) {
+		if (playerIsAtGoal) { //resets time to 30s (user-selected)
 			TimeKeeper.timeLeft = TimeKeeper.timeAtLevelStart;
 			LoadNextLevel ();
 		}
@@ -112,6 +112,13 @@ public class LevelLoader : MonoBehaviour {
 
 	public static void LoadGameOver(){
 		levelNum = 9;
+		TimeKeeper.timeAtLevelStart = 10f;
+		SceneManager.LoadScene("main");
+	}
+
+	public static void RestartScene(){
+		levelNum = 0;
+		SceneManager.LoadScene("main");
 	}
 
 //
