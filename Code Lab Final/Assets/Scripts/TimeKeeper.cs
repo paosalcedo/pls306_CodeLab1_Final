@@ -1,25 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TimeKeeper : MonoBehaviour {
 
-	public static TimeKeeper instance;
+	public Text timeText;
 
-	public float gameTime;
-
-	// Use this for initialization
+	public List<float> levelTimes = new List<float>();
+	public static float timeAtLevelStart;
+	public static float timeLeft;
+  	
+ 	// Use this for initialization
 	void Start ()
 	{
-		if (instance == null) {
-			instance = this;
-		} else {
-			DontDestroyOnLoad(this);
-		}
+		Debug.Log("Loaded level " + LevelLoader.levelNum);
+ 		timeAtLevelStart = levelTimes[LevelLoader.levelNum] + timeLeft;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		gameTime += Time.deltaTime;
+		timeAtLevelStart -= Time.deltaTime;
+		ShowTimer();
+	}
+
+	void ShowTimer ()
+	{
+  		timeText.text = timeAtLevelStart.ToString ("Time Left: " + "##");
 	}
 }

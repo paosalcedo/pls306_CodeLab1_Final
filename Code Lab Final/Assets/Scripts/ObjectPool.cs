@@ -22,12 +22,14 @@ public class ObjectPool : MonoBehaviour {
 				return result;
 
 			} 
-		} else {
+		} 
+		else {
 			if (wallPool.Count > 0) {
 				result = wallPool.Dequeue();
 				return result;
 
 			} 
+
 			else {
 				result = Instantiate (Resources.Load ("Prefabs/Wall") as GameObject);
 				return result;

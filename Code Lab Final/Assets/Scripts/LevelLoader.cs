@@ -13,10 +13,11 @@ public class LevelLoader : MonoBehaviour {
 	 
 	public string[] fileNames;
 	public static int levelNum = 0;
-
+	
 	// Use this for initialization
 	void Start ()
 	{	
+		
 
 //		GameOverCheck();
 //		Debug.Log("Lives left: " + LivesKeeper.instance.Lives);
@@ -58,7 +59,7 @@ public class LevelLoader : MonoBehaviour {
 			
 				//Instantiate Player
 				if (line [xPos] == 'p') { 
-					GameObject player = Instantiate (Resources.Load ("Prefabs/Player") as GameObject);
+					GameObject player = Instantiate (Resources.Load ("Prefabs/Particle") as GameObject);
 					player.transform.position = new Vector3 (
 						xPos + offsetX, 
 						yPos + offsetY,
@@ -84,18 +85,29 @@ public class LevelLoader : MonoBehaviour {
 	}
 
 	public static bool playerIsAtGoal;
+	public static bool gameIsOver;
 	// Update is called once per frame
 	void Update ()
 	{
-		if (playerIsAtGoal == true) {
-			LoadNextLevel();
+		if (playerIsAtGoal) {
+			TimeKeeper.timeLeft = TimeKeeper.timeAtLevelStart;
+			LoadNextLevel ();
 		}
+		
+		if (Input.GetKeyDown (KeyCode.R)) {
+			RestartCurrentLevel();
+		}
+
 	}
 
 	void LoadNextLevel ()
 	{
 		levelNum++;
  		SceneManager.LoadScene ("main");
+	}
+
+	void RestartCurrentLevel(){
+		SceneManager.LoadScene("main");
 	}
 
 //

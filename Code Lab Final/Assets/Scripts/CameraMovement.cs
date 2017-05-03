@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour {
 		Move(Vector3.down, backKey);
 		Move(Vector3.left, rightKey);
 		Move(Vector3.right, leftKey);
-
+		
 //		ShootRay();
 	}
 
