@@ -110,6 +110,10 @@ public class LevelLoader : MonoBehaviour {
 		SceneManager.LoadScene("main");
 	}
 
+	public static void LoadGameOver(){
+		levelNum = 9;
+	}
+
 //
 //	void EndLevel ()
 //	{

@@ -19,8 +19,12 @@ public class TimeKeeper : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		timeAtLevelStart -= Time.deltaTime;
+		if (timeAtLevelStart <= 0) {
+			LevelLoader.LoadGameOver();
+		}
 		ShowTimer();
 	}
 
@@ -28,4 +32,5 @@ public class TimeKeeper : MonoBehaviour {
 	{
   		timeText.text = timeAtLevelStart.ToString ("Time Left: " + "##");
 	}
+
 }

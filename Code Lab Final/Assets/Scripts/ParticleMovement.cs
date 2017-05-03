@@ -39,6 +39,7 @@ public class ParticleMovement : MonoBehaviour {
 				dir = reflection;
 			}
 			else if (rayHit.collider.tag == "Goal") {
+				Debug.Log("player hit goal # " + LevelLoader.levelNum);
 				LevelLoader.playerIsAtGoal = true;
 			}
 
