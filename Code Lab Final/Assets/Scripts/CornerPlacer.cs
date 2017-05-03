@@ -41,11 +41,18 @@ public class CornerPlacer : ObjectPlacer {
 			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out rayHit, Camera.main.farClipPlane)) {
 				GameObject corner = Instantiate (Resources.Load ("Prefabs/Corner") as GameObject);
 				corner.transform.position = rayHit.point;
+				corner.transform.eulerAngles = cursorCorner.transform.eulerAngles;
 				Debug.Log (rayHit.transform.name);
 			} else {
 				Debug.Log ("hit nothing!");
 			}
 		}
+	}
+
+	public override void ObjectRotate(){
+		cursorCorner.transform.eulerAngles = new Vector3 (	cursorCorner.transform.eulerAngles.x,
+															cursorCorner.transform.eulerAngles.y,
+															cursorCorner.transform.eulerAngles.z + 90f);
 	}
 
 }

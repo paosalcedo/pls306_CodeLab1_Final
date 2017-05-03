@@ -31,6 +31,9 @@ public class ObjectPlacer : MonoBehaviour {
 			PlaceObject(blockNum);
 		} 
 
+		if (Input.GetMouseButtonDown (1)) { //On mouse button down
+			ObjectRotate();
+		}
 	}
 
 	public virtual void ShowObject (int num)
@@ -69,8 +72,9 @@ public class ObjectPlacer : MonoBehaviour {
 		}
 	}
 
-	public virtual void ObjectRotate ()
-	{
+	public virtual void ObjectRotate (){
+
 	}
+ 
 }
 
