@@ -97,7 +97,6 @@ public class LevelLoader : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.R)) {
 			RestartCurrentLevel();
 		}
-
 	}
 
 	void LoadNextLevel ()

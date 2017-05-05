@@ -14,15 +14,16 @@ public abstract class Poolable : MonoBehaviour {
 	
  	void Update ()
 	{
- 		if(RePool()){
-			ObjectPool.AddToPool(gameObject); 
-  		}	
+// 		if(RePool()){
+//			Debug.Log("SOMETHING GOT REPOOLED in POOLABLE.CS");
+//			ObjectPool.AddToPool(gameObject); 
+// 		}	
 	
 	}
 
 	public abstract void Setup();
 
-	public abstract bool RePool();
+//	public abstract bool RePool();
 
 	public abstract void Reset();
 

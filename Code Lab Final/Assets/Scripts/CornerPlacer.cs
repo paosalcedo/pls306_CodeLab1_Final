@@ -43,9 +43,7 @@ public class CornerPlacer : ObjectPlacer {
 				corner.transform.position = rayHit.point;
 				corner.transform.eulerAngles = cursorCorner.transform.eulerAngles;
 				Debug.Log (rayHit.transform.name);
-			} else {
-				Debug.Log ("hit nothing!");
-			}
+			} 
 		}
 	}
 

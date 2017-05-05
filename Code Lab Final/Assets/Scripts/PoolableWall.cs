@@ -4,30 +4,20 @@ using UnityEngine;
 
 public class PoolableWall : Poolable {
 
-	public float timeAlive;
- 
+	
 	public override void Setup ()
 	{
- 	}
-
-	void Start(){
-		timeAlive = 1f;
- 	}
-	void Update ()
-	{
- 		timeAlive -= Time.deltaTime;
+		Debug.Log("SETUP!");
 	}
 
-	public override bool RePool ()
-	{
-		//put back in pool if this is true. 
-		//perhaps if it's off cam?  
-
-		return timeAlive <= 0;
- 	}
+//	public override bool RePool ()
+//	{
+//// 		return true;
+// 	}
 
 	public override void Reset ()
 	{
- 		transform.position = GameObject.FindGameObjectWithTag("CursorCube").transform.position;
+		Debug.Log("RESETTING!");
+		transform.position = GameObject.FindGameObjectWithTag("CursorCube").transform.position;
 	}
 }

@@ -12,23 +12,41 @@ public class ObjectPlacer : MonoBehaviour {
 //	[SerializeField]KeyCode block05;
 	
 	GameObject cursorCube;
+	GameObject[] cubesPlaced;
+	GameObject[] cornersPlaced;
+
 
 	// Use this for initialization
 	void Start () {
 		cursorCube = Instantiate (Resources.Load ("Prefabs/CursorCube") as GameObject);
+		blockNum = 1;
+		ShowObject(blockNum);
  	}
 	
 	// Update is called once per frame
-	void Update () {
-		ObjectSelect(1, block01);
-		ObjectSelect(2, block02);
+	void Update ()
+	{
+//Find all cubes and corners in the scene.
+		cubesPlaced = GameObject.FindGameObjectsWithTag ("Cube");
+		cornersPlaced = GameObject.FindGameObjectsWithTag ("Corner"); 
+
+		ObjectSelect (1, block01);
+		ObjectSelect (2, block02);
 //		BlockSelect(3, block03);
 //		BlockSelect(4, block04);
+		
+		if (cubesPlaced.Length > 1) {
+			ObjectPool.AddToPool (cubesPlaced [0]);
+		}
+	
+		if (cornersPlaced.Length > 1) {
+			ObjectPool.AddToPool (cornersPlaced [0]);
+		}
 
 //		ObjectRotate();
 		ShowObject(blockNum);
  		if (Input.GetMouseButtonDown (0)) { //On mouse button down
-			PlaceObject(blockNum);
+  			PlaceObject(blockNum);
 		} 
 
 		if (Input.GetMouseButtonDown (1)) { //On mouse button down
@@ -43,8 +61,7 @@ public class ObjectPlacer : MonoBehaviour {
 			RaycastHit rayHit; //create a RaycastHit object	
 			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out rayHit, Camera.main.farClipPlane)) {
 				cursorCube.transform.position = rayHit.point;
-				Debug.Log (rayHit.transform.name);
- 			} 
+  			} 
 		} else {
 			cursorCube.transform.position = new Vector3 (10000, 10000, 10000);
 		}
@@ -58,8 +75,12 @@ public class ObjectPlacer : MonoBehaviour {
 			RaycastHit rayHit; //create a RaycastHit object	
 			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out rayHit, Camera.main.farClipPlane)) {
 //				GameObject cube = Instantiate (Resources.Load ("Prefabs/Cube") as GameObject);
-				GameObject cube = ObjectPool.GetFromPool(Poolable.types.WALL);
-				cube.transform.position = rayHit.point;
+				GameObject cube = ObjectPool.GetFromPool (Poolable.types.WALL);
+				if (rayHit.collider.tag == "Cube" || rayHit.collider.tag == "Wall" || rayHit.collider.tag == "Corner") {
+					cube.transform.position = rayHit.point + Vector3.forward;
+				} else {
+					cube.transform.position = rayHit.point;
+				}
  			}  
 		}
   	}

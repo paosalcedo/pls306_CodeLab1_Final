@@ -21,10 +21,10 @@ public class TimeKeeper : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if (LevelLoader.levelNum <= 7) { //normal levels
+		if (LevelLoader.levelNum <= 6) { //normal levels
 			timeAtLevelStart -= Time.deltaTime;
 			if (timeAtLevelStart <= 0) {
-				LevelLoader.LoadGameOver ();
+				LevelLoader.RestartScene ();
 			}
 		} else { // game over and you win levels.
  			timeAtLevelStart -= Time.deltaTime;

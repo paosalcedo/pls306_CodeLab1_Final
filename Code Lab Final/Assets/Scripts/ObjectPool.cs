@@ -14,6 +14,7 @@ public class ObjectPool : MonoBehaviour {
 
 		if (type == Poolable.types.CORNER) {
 			if (cornerPool.Count > 0) {
+				Debug.Log("corner dequeued!");
 				result = cornerPool.Dequeue ();
 				return result;
 			}
@@ -24,6 +25,7 @@ public class ObjectPool : MonoBehaviour {
 		} 
 		else {
 			if (wallPool.Count > 0) {
+				Debug.Log("cube dequeued!");
 				result = wallPool.Dequeue();
 				return result;
 			} 
@@ -42,18 +44,18 @@ public class ObjectPool : MonoBehaviour {
 	public static void AddToPool (GameObject obj)
 	{
 		obj.SetActive (false);
-		Poolable p = obj.GetComponent<Poolable> ();
-		
-		if (p is PoolableCorner) {
-			cornerPool.Enqueue (obj);
-			Debug.Log("corner enqueued!");
-		} else if (p is PoolableWall) {
-			wallPool.Enqueue (obj);
-			Debug.Log("cube enqueued!");
-
-		} else {
-			Debug.Log("you have not implemented a pool for this");
-		}
+//		Poolable p = obj.GetComponent<Poolable> ();
+//		
+//		if (p is PoolableCorner) {
+//			cornerPool.Enqueue (obj);
+//			Debug.Log("corner enqueued!");
+//		} else if (p is PoolableWall) {
+//			wallPool.Enqueue (obj);
+////			Debug.Log("cube enqueued!");
+//
+//		} else {
+//			Debug.Log("you have not implemented a pool for this");
+//		}
 
 	}
  
