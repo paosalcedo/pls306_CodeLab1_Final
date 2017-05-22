@@ -38,7 +38,7 @@ public class ParticleMovement : MonoBehaviour {
 				Vector3.Distance (transform.position, rayHit.point) < 0.25f && rayHit.collider.tag != "Goal") {
 				dir = reflection;
 			}
-			else if (rayHit.collider.tag == "Goal") {
+			else if (rayHit.collider.tag == "Goal" && Vector3.Distance(transform.position, rayHit.point) < 0.25f) {
 				Debug.Log("player hit goal # " + LevelLoader.levelNum);
 				LevelLoader.playerIsAtGoal = true;
 			}

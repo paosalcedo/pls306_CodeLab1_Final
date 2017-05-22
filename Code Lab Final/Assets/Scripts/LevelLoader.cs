@@ -32,7 +32,9 @@ public class LevelLoader : MonoBehaviour {
 
 		string filePath = Application.dataPath + "/" + fileName;
 
-		StreamReader sr = new StreamReader (filePath);
+//		StreamReader sr = new StreamReader (filePath);
+
+		StreamReader sr = new StreamReader(new MemoryStream((Resources.Load(fileName) as TextAsset).bytes));
 
 		GameObject levelHolder = new GameObject ("Level Holder");
 

@@ -15,6 +15,7 @@ public class ObjectPlacer : MonoBehaviour {
 	GameObject[] cubesPlaced;
 	GameObject[] cornersPlaced;
 
+	public int numberOfBlocks;
 
 	// Use this for initialization
 	void Start () {
@@ -35,14 +36,18 @@ public class ObjectPlacer : MonoBehaviour {
 //		BlockSelect(3, block03);
 //		BlockSelect(4, block04);
 		
-		if (cubesPlaced.Length > 1) {
-			ObjectPool.AddToPool (cubesPlaced [0]);
-		}
-	
-		if (cornersPlaced.Length > 1) {
+//		if (cubesPlaced.Length > 1) {
+//			ObjectPool.AddToPool (cubesPlaced [0]);
+//		}
+//	
+//		if (cornersPlaced.Length > 1) {
+//			ObjectPool.AddToPool (cornersPlaced [0]);
+//		}
+
+		if (cubesPlaced.Length > 1 || cornersPlaced.Length > 1) {
+			ObjectPool.AddToPool (cubesPlaced [0]);	
 			ObjectPool.AddToPool (cornersPlaced [0]);
 		}
-
 //		ObjectRotate();
 		ShowObject(blockNum);
  		if (Input.GetMouseButtonDown (0)) { //On mouse button down
@@ -75,7 +80,7 @@ public class ObjectPlacer : MonoBehaviour {
 			RaycastHit rayHit; //create a RaycastHit object	
 			if (Physics.Raycast (Camera.main.ScreenPointToRay (Input.mousePosition), out rayHit, Camera.main.farClipPlane)) {
 //				GameObject cube = Instantiate (Resources.Load ("Prefabs/Cube") as GameObject);
-				GameObject cube = ObjectPool.GetFromPool (Poolable.types.WALL);
+				GameObject cube = ObjectPool.GetFromPool (Poolable.types.WALL); 
 				if (rayHit.collider.tag == "Cube" || rayHit.collider.tag == "Wall" || rayHit.collider.tag == "Corner") {
 					cube.transform.position = rayHit.point + Vector3.forward;
 				} else {
