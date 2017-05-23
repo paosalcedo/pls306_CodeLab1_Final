@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPlacer : MonoBehaviour {
-	
+
+	public bool cubeWasPlaced;
+	public bool cornerWasPlaced;
 	protected int blockNum;
  	[SerializeField]KeyCode block01;
 	[SerializeField]KeyCode block02;
@@ -12,8 +14,8 @@ public class ObjectPlacer : MonoBehaviour {
 //	[SerializeField]KeyCode block05;
 	
 	GameObject cursorCube;
-	GameObject[] cubesPlaced;
-	GameObject[] cornersPlaced;
+	public GameObject[] cubesPlaced;
+	public GameObject[] cornersPlaced;
 
 	public int numberOfBlocks;
 
@@ -35,23 +37,76 @@ public class ObjectPlacer : MonoBehaviour {
 		ObjectSelect (2, block02);
 //		BlockSelect(3, block03);
 //		BlockSelect(4, block04);
-		
+
+		numberOfBlocks = cubesPlaced.Length + cornersPlaced.Length;
+
+//		if (numberOfBlocks > 1) {
+//			if (cubeWasPlaced) {
+//				Debug.Log ("Cube added to pool!");
+//				ObjectPool.AddToPool (cubesPlaced [0]);
+//			} 
+//			if (cornerWasPlaced) {
+//				Debug.Log ("corner added to pool!");
+//				ObjectPool.AddToPool (cornersPlaced [0]);
+//			}
+//		} 
+
+// WORKS, BUT ALLOWS YOU TO PLACE ONE OF EACH BLOCK TYPE ON THE LEVEL.
 //		if (cubesPlaced.Length > 1) {
 //			ObjectPool.AddToPool (cubesPlaced [0]);
 //		}
 //	
-//		if (cornersPlaced.Length > 1) {
+//		if (cornersPlaced.Length > 1 ) {
 //			ObjectPool.AddToPool (cornersPlaced [0]);
 //		}
 
-		if (cubesPlaced.Length > 1 || cornersPlaced.Length > 1) {
-			ObjectPool.AddToPool (cubesPlaced [0]);	
-			ObjectPool.AddToPool (cornersPlaced [0]);
-		}
-//		ObjectRotate();
+//		if (cubesPlaced.Length > 1 ) {
+//			ObjectPool.AddToPool (cubesPlaced [0]);
+//		}
+	
+//		if (cornersPlaced.Length > 1 ) {
+//			ObjectPool.AddToPool (cornersPlaced [0]);
+//			if (cubesPlaced.Length > 0) { //if there is also a cube?
+//				ObjectPool.AddToPool (cubesPlaced [0]);			
+//			}
+//		} else if (cubesPlaced.Length > 1 ) {
+//			ObjectPool.AddToPool (cubesPlaced[0]);
+//			if (cornersPlaced.Length > 0) { //if there is also a cube?
+//				ObjectPool.AddToPool (cornersPlaced [0]);			
+//			}
+//		}
+
+//		if (cubesPlaced.Length > 1 || cornersPlaced.Length > 1) {
+//			ObjectPool.AddToPool (cubesPlaced [0]);	
+//			ObjectPool.AddToPool (cornersPlaced [0]);
+//		}
+
+//		if ((cubesPlaced.Length + cornersPlaced.Length) > 1) {
+//			ObjectPool.AddToPool (cubesPlaced [0]);	
+//			ObjectPool.AddToPool (cornersPlaced [1]);
+//		}
+
 		ShowObject(blockNum);
+
  		if (Input.GetMouseButtonDown (0)) { //On mouse button down
-  			PlaceObject(blockNum);
+			PlaceObject(blockNum);
+			if (numberOfBlocks >= 1) {
+				if(cubeWasPlaced){
+					ObjectPool.AddToPool (cubesPlaced [0]);
+					cubeWasPlaced = false;
+				}
+				if (cornerWasPlaced) {
+					ObjectPool.AddToPool (cornersPlaced [0]);			
+					cornerWasPlaced = false;
+				}
+			}
+			
+			if (blockNum == 1) {
+				cubeWasPlaced = true;
+			} 
+			if (blockNum == 2) {
+				cornerWasPlaced = true;
+			}
 		} 
 
 		if (Input.GetMouseButtonDown (1)) { //On mouse button down
